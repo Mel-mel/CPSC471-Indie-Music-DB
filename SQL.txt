@@ -1,0 +1,109 @@
+
+
+CREATE TABLE Account(
+acc_id int NOT NULL,
+acc_name varchar(255) NOT NULL,
+password varchar(255) NOT NULL,
+real_name varchar(255) NOT NULL,
+country varchar(255),
+birth_date varchar(255),
+email varchar(255) NOT NULL,
+PRIMARY KEY (acc_id)
+)
+
+CREATE TABLE Administrator(
+acc_id int NOT NULL,
+acc_name varchar(255) NOT NULL,
+password varchar(255) NOT NULL,
+real_name varchar(255) NOT NULL,
+country varchar(255),
+birth_date varchar(255),
+email varchar(255) NOT NULL,
+PRIMARY KEY (acc_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE User(
+acc_id int NOT NULL,
+acc_name varchar(255) NOT NULL,
+password varchar(255) NOT NULL,
+real_name varchar(255) NOT NULL,
+country varchar(255),
+birth_date varchar(255),
+email varchar(255) NOT NULL,
+acc_descrip varchar(255), 
+PRIMARY KEY (acc_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE Song(
+song_id int NOT NULL,
+song_name varchar(255) NOT NULL,
+song_descrip varchar(255),
+file_format varchar(255) NOT NULL,
+genre varchar(255),
+PRIMARY KEY (song_id)
+)
+
+CREATE TABLE Playlist(
+playlist_id int NOT NULL,
+playlist_name varchar(255) NOT NULL,
+playlist_descrip varchar(255),
+sort_by varchar(255),
+PRIMARY KEY (playlist_id)
+)
+
+CREATE TABLE Mood(
+song_id int NOT NULL,
+PRIMARY KEY (song_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id)
+)
+
+CREATE TABLE Rate_Out_Of_Five(
+acc_id int NOT NULL,
+song_id int NOT NULL,
+CONSTRAINT acc_Rate_Song PRIMARY KEY (acc_id, song_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id)
+)
+
+CREATE TABLE Own(
+playlist_id int NOT NULL,
+acc_id int NOT NULL,
+PRIMARY KEY (playlist_id),
+FOREIGN KEY (playist_id) REFERENCES  Playlist (playlist_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE Upload(
+song_id int NOT NULL,
+acc_id int NOT NULL,
+PRIMARY KEY (song_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE Download(
+song_id int NOT NULL,
+acc_id int NOT NULL,
+PRIMARY KEY (song_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE Rate(
+song_id int NOT NULL,
+acc_id int NOT NULL,
+CONSTRAINT acc_Rate_Song PRIMARY KEY (song_id, acc_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id),
+FOREIGN KEY (acc_id) REFERENCES  Account (acc_id)
+)
+
+CREATE TABLE Create(
+song_id int NOT NULL,
+playlist_id int NOT NULL,
+CONSTRAINT create_Playlist PRIMARY KEY (song_id, playlist_id),
+FOREIGN KEY (song_id) REFERENCES  Song (song_id),
+FOREIGN KEY (playist_id) REFERENCES  Playlist (playlist_id)
+)
+
