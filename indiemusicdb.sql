@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2016 at 06:19 AM
+-- Generation Time: Mar 27, 2016 at 06:32 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -35,6 +35,13 @@ CREATE TABLE `account` (
   `birth_date` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `account`
+--
+
+INSERT INTO `account` (`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES
+(8, 'bobby', '111', 'Bob', '', '', 'some email');
 
 -- --------------------------------------------------------
 
@@ -254,6 +261,25 @@ ALTER TABLE `upload`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`acc_id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `account`
+--
+ALTER TABLE `account`
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `playlist_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `song`
+--
+ALTER TABLE `song`
+  MODIFY `song_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

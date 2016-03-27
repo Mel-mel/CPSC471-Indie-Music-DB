@@ -4,10 +4,23 @@
 	<link rel="stylesheet" href="styles.css">
 	</head>
 <body>
+<?php
+	include_once("./connect.php");
+?>
 
-<h1> First Heading. </h1>
-<h2>Random heading with color background</h2>
-<h6 style="background-color:cyan;"> The other heading</h6>
+
+
+<h1> WELCOME TO THE INDIE MUSIC DATABASE! </h1>
+
+<form action="http://localhost/indiemusicdb/loginPage.php">
+	<input type="submit" value="Login">
+</form>
+
+<form action="http://localhost/indiemusicdb/createAccount.php">
+	<input type="submit" value="Create an account">
+</form>
+
+
 
 <!--title will show up when you mouse over the text in that paragraph -->
 <p title ="Random stuff"> My first paragraph </p>
