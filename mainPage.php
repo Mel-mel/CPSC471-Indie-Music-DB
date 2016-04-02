@@ -19,7 +19,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	
 
 }
-
 function getInput($data)
 {
 	$data = trim($data);
@@ -32,7 +31,7 @@ function getInput($data)
 
 <h1> WELCOME TO THE INDIE MUSIC DATABASE! </h1>
 
-<form action="mainPage.php" method="post">
+<form action="loginPage.php" method="post">
 	<fieldset>
 		<font size="6"><legend> Login into your account </legend></font>
 		Username:<br>

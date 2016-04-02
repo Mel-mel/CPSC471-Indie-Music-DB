@@ -4,6 +4,13 @@
 	<link rel="stylesheet" href="styles.css">
 	</head>
 <body>
+
+<script>
+function goMainPage()
+{
+	window.location.assign("mainPage.php");
+}
+</script>
 <?php
 	include_once("./connect.php");
 	
@@ -34,14 +41,15 @@ function checkUserLoginInfo($db, $username, $password)
 	
 	if(mysqli_num_rows($runQuery) == false)
 	{
-		//window.alert("<p style="."position:relative;left:250px;top:250px;"."> Invalid username or password</p>");
+		//Window.alert("<p style="."position:relative;left:250px;top:250px;"."> Invalid username or password</p>");
 		echo "<p style="."position:relative;left:250px;top:250px;"."> Invalid username or password</p>";
 		
 	}
 	else
 	{
-	echo "inside else";
-		//echo "<form action="."mainPage.php>"."</form>";
+		//Goes to the next page.
+		header("Location: mainPage.php");
+		
 	}
 }
 
@@ -52,9 +60,6 @@ function getInput($data)
 	$data = htmlspecialchars($data);
 	return $data;
 }
-
-
-
 
 ?>
 
