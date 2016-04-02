@@ -1,3 +1,7 @@
+<?php
+	include_once("./connect.php");
+	
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,19 +15,18 @@ function goMainPage()
 	window.location.assign("mainPage.php");
 }
 </script>
-<?php
-	include_once("./connect.php");
-	
-?>
+
 <?php
 //Defining variables set to a default of null
 $username = $password = "";
+
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$username = getInput($_POST["user"]);
 	$password = getInput($_POST["pw"]);
+	
 }
 
 if(isset($_POST['loginAttempt']))
@@ -34,8 +37,18 @@ if(isset($_POST['loginAttempt']))
 
 function checkUserLoginInfo($db, $username, $password)
 {
+	//Fetch the account ID for the user in the current session
+	$userID = "SELECT `acc_id` FROM `account` WHERE(`acc_name`='" .$_SESSION["username"]. "')";
+	$id = mysqli_query($db, $userID);
+	$accID = mysqli_fetch_assoc($id);
+	$_SESSION["accountID"] = $accID["acc_id"];
+	
+	// Set session variables
+	$_SESSION["username"] = "".$username."";
+	$_SESSION["password"] = "".$password."";
+	
+	//Check if the entered info is correct
 	$inQuery = "SELECT `acc_name`, `password` FROM `account` WHERE (`acc_name`='" .$username. "' AND `password`='" .$password ."')";
-	//SELECT `acc_name`, `password` FROM `account` WHERE `acc_name`='ren-chon' AND `password`='1234'
 	
 	$runQuery = mysqli_query($db, $inQuery);
 	
@@ -60,6 +73,7 @@ function getInput($data)
 	$data = htmlspecialchars($data);
 	return $data;
 }
+
 
 ?>
 

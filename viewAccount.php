@@ -1,29 +1,33 @@
+<?php
+	include_once("./connect.php");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 	<link rel="stylesheet" href="styles.css">
 	</head>
 <body>
-<?php
-	include_once("./connect.php");
-?>
 
 <?php
-if(isset($_POST['']))
-{
-	//echo "inside the if";
-	viewContent($db);
-}
+
+viewContent($db);
 
 function viewContent($db)
 {
-	$inQuery = "SELECT `acc_name`, `real_name`, `country`, `birth_date`, `email` FROM `account` WHERE (`acc_name`
+	$inQuery = "SELECT `acc_name`, `real_name`, `country`, `birth_date`, `email` FROM `account` WHERE (`acc_name`='" .$_SESSION["username"]. "' AND `password`='" .$_SESSION["password"] ."' AND `acc_id`='".$_SESSION["accountID"]."')";
+	$runQuery = mysqli_query($db, $inQuery);
 	
-	"SELECT `acc_name`, `password` FROM `account` WHERE (`acc_name`='" .$username. "' AND `password`='" .$password ."')";
+	while($row = mysqli_fetch_assoc($runQuery))
+	{
+		echo $row["acc_name"].$row["real_name"]. $row["country"] . $row["birth_date"] . $row["email"];
+	}
+	
 }
 ?>
 
-
+<form action="" method="post">
+	<input type="text" value="View stuff">
+</form>
 
 
 <form action="mainPage.php">
