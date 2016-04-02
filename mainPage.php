@@ -31,9 +31,6 @@
 <?php
 //Defining variables set to a default of null
 $username = $password = "";
-
-
-echo $_SESSION["accountID"];
 	
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
