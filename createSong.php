@@ -39,7 +39,7 @@ function getInput($data)
 	return $data;
 }
 ?>
-<form action="index.php">
+<form action="loginPage.php">
 	<input type="submit" value="Back to Main" style="position:relative;left:15px;top:281px;">
 </form>
 

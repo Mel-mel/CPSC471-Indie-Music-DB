@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 12:46 AM
+-- Generation Time: Mar 27, 2016 at 06:32 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -41,8 +41,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES
-(8, 'bobby', '111', 'Bob', '', '', 'some email'),
-(12, 'ren-chon', '1234', 'renge', 'japan', '09/05/2000', 'renchon@gmail.com');
+(8, 'bobby', '111', 'Bob', '', '', 'some email');
 
 -- --------------------------------------------------------
 
@@ -188,8 +187,7 @@ CREATE TABLE `user` (
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`acc_id`),
-  ADD UNIQUE KEY `acc_name` (`acc_name`);
+  ADD PRIMARY KEY (`acc_id`);
 
 --
 -- Indexes for table `administrator`
@@ -271,7 +269,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `playlist`
 --
