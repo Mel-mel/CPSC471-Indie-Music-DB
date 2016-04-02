@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,10 +24,16 @@ function goMainPage()
 $username = $password = "";
 
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$username = getInput($_POST["user"]);
 	$password = getInput($_POST["pw"]);
+	
+	// Set session variables
+	$_SESSION["username"] = "".$username."";
+	$_SESSION["password"] = "".$password."";
+	echo "Session variables are set.";
 }
 
 if(isset($_POST['loginAttempt']))
@@ -35,6 +45,7 @@ if(isset($_POST['loginAttempt']))
 function checkUserLoginInfo($db, $username, $password)
 {
 	$inQuery = "SELECT `acc_name`, `password` FROM `account` WHERE (`acc_name`='" .$username. "' AND `password`='" .$password ."')";
+	//$currentID = "SELECT `acc_id` From `account` WHERE (`acc_id` = 
 	//SELECT `acc_name`, `password` FROM `account` WHERE `acc_name`='ren-chon' AND `password`='1234'
 	
 	$runQuery = mysqli_query($db, $inQuery);
