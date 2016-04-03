@@ -53,7 +53,7 @@ function getInput($data)
 
 ?>
 
-
+<font size="16"><p><b>Administrator</b></p></font>
 
 <div class="container">
 <ul class="nav nav-pills nav-stacked navbar-right" >
@@ -61,8 +61,8 @@ function getInput($data)
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account
 		<span class="caret"></span></a>
 		<ul class="dropdown-menu">
-			<li><a target="" href="viewAccount.php">View Account</a></li>
-			<li><a target="" href="editAccount.php">Edit Account</a></li>
+			<li><a target="" href="adminviewAccount.php">View Account</a></li>
+			<li><a target="" href="admineditAccount.php">Edit Account</a></li>
 			<li><a target="" href="uploadSong.php">Upload a Song</a></li>
 			<li><a target="" href="logout.php">Logout</a></li>
 		</ul>

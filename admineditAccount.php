@@ -167,7 +167,7 @@ function getInput($data)
 
 
 
-<form action="mainPage.php">
+<form action="adminMainPage.php">
 	<input type="submit" value="Cancel edits" style="position:relative;left:0px;top:240px;">
 </form>
 
