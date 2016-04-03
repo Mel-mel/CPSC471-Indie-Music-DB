@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$songname = getInput($_POST["song"]);
 	$song_descrip = getInput($_POST["description"]);
-	$file_format = getInput($_POST["file format"]);
+	$file_format = getInput($_POST["fileformat"]);
 	$genre = getInput($_POST["genre"]);
 	
 	//Adding new information for an account
@@ -51,7 +51,7 @@ function getInput($data)
 		Song Description:<br>
 		<input type="text" name="description" required><br>
 		File Format:<br>
-		<input type="text" name="file format" required><br>
+		<input type="text" name="fileformat" required><br>
 		Genre:<br>
 		<input type="text" name="genre"><br>
 		<input type="submit" value="Submit" style="position:relative;left:120px;top:2px;">

@@ -1,4 +1,3 @@
-
 <?php
 $user = 'musicuser';
 $dbpassword = 'password';
