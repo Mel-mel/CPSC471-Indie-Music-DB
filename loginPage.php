@@ -1,3 +1,6 @@
+<?php
+	include_once("./connect.php");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,31 +14,49 @@ function goMainPage()
 	window.location.assign("mainPage.php");
 }
 </script>
-<?php
-	include_once("./connect.php");
-	
-?>
+
 <?php
 //Defining variables set to a default of null
 $username = $password = "";
+
 
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$username = getInput($_POST["user"]);
 	$password = getInput($_POST["pw"]);
+	
 }
 
 if(isset($_POST['loginAttempt']))
 {
 	//echo "inside the if";
-	checkUserLoginInfo($db, $username, $password);
+	if(isset($_POST['administrator']))
+	{
+		checkAdminInfo($db, $username, $password);
+	}
+	else
+	{
+		checkUserLoginInfo($db, $username, $password);
+	}
+	
 }
 
+//Check if the user who isn't the admin has the right username and password
 function checkUserLoginInfo($db, $username, $password)
 {
+	//Fetch the account ID for the user in the current session
+	$userID = "SELECT `acc_id` FROM `account` WHERE(`acc_name`='" .$username. "')";
+	$id = mysqli_query($db, $userID);
+	$accID = mysqli_fetch_assoc($id);
+	
+	// Set session variables
+	$_SESSION["accountID"] = $accID["acc_id"];
+	$_SESSION["username"] = "".$username."";
+	$_SESSION["password"] = "".$password."";
+	
+	//Check if the entered info is correct
 	$inQuery = "SELECT `acc_name`, `password` FROM `account` WHERE (`acc_name`='" .$username. "' AND `password`='" .$password ."')";
-	//SELECT `acc_name`, `password` FROM `account` WHERE `acc_name`='ren-chon' AND `password`='1234'
 	
 	$runQuery = mysqli_query($db, $inQuery);
 	
@@ -53,6 +74,38 @@ function checkUserLoginInfo($db, $username, $password)
 	}
 }
 
+//Check if the user is an admin
+function checkAdminInfo($db, $username, $password)
+{
+	//Fetch the account ID for the user in the current session
+	$userID = "SELECT `acc_id` FROM `administrator` WHERE(`acc_name`='" .$username. "')";
+	$id = mysqli_query($db, $userID);
+	$accID = mysqli_fetch_assoc($id);
+	
+	// Set session variables
+	$_SESSION["accountID"] = $accID["acc_id"];
+	$_SESSION["username"] = "".$username."";
+	$_SESSION["password"] = "".$password."";
+	
+	//Check if the entered info is correct
+	$inQuery = "SELECT `acc_name`, `password` FROM `administrator` WHERE (`acc_name`='" .$username. "' AND `password`='" .$password ."')";
+	
+	$runQuery = mysqli_query($db, $inQuery);
+	
+	if(mysqli_num_rows($runQuery) == false)
+	{
+		//Window.alert("<p style="."position:relative;left:250px;top:250px;"."> Invalid username or password</p>");
+		echo "<p style="."position:relative;left:250px;top:250px;"."> Invalid username or password</p>";
+		
+	}
+	else
+	{
+		//Goes to the next page.
+		header("Location: adminMainPage.php");
+		
+	}
+}
+
 function getInput($data)
 {
 	$data = trim($data);
@@ -60,6 +113,7 @@ function getInput($data)
 	$data = htmlspecialchars($data);
 	return $data;
 }
+
 
 ?>
 
@@ -72,6 +126,7 @@ function getInput($data)
 		<input type="text" name="user"><br>
 		Password:<br>
 		<input type="password" name="pw"><br>
+		<input type="checkbox" name="administrator">Administrator?<br>
 		<input type="submit" name="loginAttempt" value="Login" style="position:relative;left:120px;top:2px;">
 	</fieldset>
 </form>
