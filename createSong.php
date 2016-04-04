@@ -17,12 +17,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	$file_format = getInput($_POST["fileformat"]);
 	$genre = getInput($_POST["genre"]);
 	
-	//Adding new information for an account
 	$newSongQuery = "INSERT INTO Song (song_name, song_descrip, file_format, genre) VALUES ('" .$songname ."', '" . $song_descrip ."', '" . $file_format . "', '" . $genre . "')";
 	$result = mysqli_query($db, $newSongQuery, MYSQLI_STORE_RESULT);
-	
-	
-	//echo "INSERT INTO Account (acc_name, password, real_name, country, birth_date, email) VALUES ('" .$username ."', '" . $password ."', 'Bob', '', '', 'some email')";
+
 
 	if($result === false)
 	{
@@ -39,7 +36,7 @@ function getInput($data)
 	return $data;
 }
 ?>
-<form action="loginPage.php">
+<form action="mainPage.php">
 	<input type="submit" value="Back to Main" style="position:relative;left:15px;top:281px;">
 </form>
 

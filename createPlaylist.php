@@ -16,7 +16,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	$descrip = getInput($_POST["description"]);
 	$sort = getInput($_POST["sort"]);
 	
-	//Adding new information for an account
 	$newPlaylistQuery = "INSERT INTO Playlist (playlist_name, playlist_descrip, sort_by) VALUES ('" .$playlist ."', '" . $descrip ."', '" . $sort . "')";
 	$result = mysqli_query($db, $newPlaylistQuery, MYSQLI_STORE_RESULT);
 
@@ -35,7 +34,7 @@ function getInput($data)
 	return $data;
 }
 ?>
-<form action="loginPage.php">
+<form action="mainPage.php">
 	<input type="submit" value="Back to Main" style="position:relative;left:15px;top:281px;">
 </form>
 
