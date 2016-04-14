@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <?php
@@ -30,6 +31,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		echo "You dun fawked up";
 	}
+	else
+	{
+		//header("Location: loginPage.php");
+		echo "<font size='14'>Account created successfully!<br></font>" ."<a href='loginPage.php'><font size='12'>Click here to Login</font></a>";
+	}
 }
 
 
@@ -41,7 +47,7 @@ function getInput($data)
 	return $data;
 }
 ?>
-<form action="index.php">
+<form action="loginPage.php">
 	<input type="submit" value="Back to Main" style="position:relative;left:15px;top:281px;">
 </form>
 

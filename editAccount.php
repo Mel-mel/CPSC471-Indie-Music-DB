@@ -25,6 +25,7 @@ viewContent($db);
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
+	//viewContent($db);
 	$accname = getInput($_POST["name"]);
 	$realname = getInput($_POST["real"]);
 	$countryname = getInput($_POST["origin"]);
@@ -57,6 +58,8 @@ if(isset($_POST['newEmail']))
 	editEmail($db, $email);
 	header("Refresh:0");//Refresh the page
 }
+//echo "<font size='10'><p style='position:relative;left:5px;top:-5px;font-size:20px'>Edits saved!</p> </font>";
+
 function viewContent($db)
 {
 	$inQuery = "SELECT `acc_name`, `real_name`, `country`, `birth_date`, `email` FROM `account` WHERE (`acc_name`='" .$_SESSION["username"]. "' AND `password`='" .$_SESSION["password"] ."' AND `acc_id`='".$_SESSION["accountID"]."')";
@@ -171,7 +174,7 @@ function getInput($data)
 	<input type="submit" value="Cancel edits" style="position:relative;left:0px;top:240px;">
 </form>
 
-<form action="" method="post">
+<form action="editAccount.php" method="post">
 	Account name:<br>
 	<input type="text" name="name"><br>
 	Real name:<br>
