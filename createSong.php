@@ -8,7 +8,7 @@
 ?>
 <?php
 //Defining variables set to a default of null
-$songname = $song_descrip = $file_format = $genre = "";
+  = $song_descrip = $file_format = $genre = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
