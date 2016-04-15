@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 if(isset($_POST['loginAttempt']))
 {
 	//echo "inside the if";
-	if(isset($_POST['administrator']))
+	if($username == "admin")
 	{
 		checkAdminInfo($db, $username, $password);
 	}
@@ -126,7 +126,6 @@ function getInput($data)
 		<input type="text" name="user"><br>
 		Password:<br>
 		<input type="password" name="pw"><br>
-		<input type="checkbox" name="administrator">Administrator?<br>
 		<input type="submit" name="loginAttempt" value="Login" style="position:relative;left:120px;top:2px;">
 	</fieldset>
 </form>

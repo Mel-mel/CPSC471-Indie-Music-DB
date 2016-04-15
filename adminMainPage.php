@@ -50,7 +50,8 @@ function getInput($data)
 	return $data;
 }
 
-
+//This is to insert an admin 
+//INSERT INTO `administrator`(`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES (12,'admin', 111,'administrator','unknown','unknown','admin@music.com')
 ?>
 
 <font size="16"><p><b>Administrator</b></p></font>
@@ -64,6 +65,7 @@ function getInput($data)
 			<li><a target="" href="adminviewAccount.php">View Account</a></li>
 			<li><a target="" href="admineditAccount.php">Edit Account</a></li>
 			<li><a target="" href="uploadSong.php">Upload a Song</a></li>
+			<li><a target="" href="viewDeleteAccount.php">Remove an account</a></li>
 			<li><a target="" href="logout.php">Logout</a></li>
 		</ul>
 	</li>
