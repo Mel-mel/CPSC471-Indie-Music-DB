@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 	if($result === false)
 	{
-		echo "You dun fawked up";
+		echo "There is an error with the query.";
 	}
 }
 

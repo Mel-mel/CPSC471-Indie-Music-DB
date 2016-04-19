@@ -123,8 +123,7 @@ CREATE TABLE `playlist` (
 
 CREATE TABLE `rate` (
   `song_id` int(11) NOT NULL,
-  `acc_id` int(11) NOT NULL, 
-  `rating` int(1) NOT NULL
+  `acc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -135,8 +134,7 @@ CREATE TABLE `rate` (
 
 CREATE TABLE `rate_out_of_five` (
   `acc_id` int(11) NOT NULL,
-  `song_id` int(11) NOT NULL,
-  `rating` int(1) NOT NULL
+  `song_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

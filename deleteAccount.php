@@ -28,8 +28,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	
 	if(isset($_POST["yes"]))
 	{
-		//$query = "DELETE FROM `account` WHERE `acc_id`='".$_GET['userID']."'" ;
-		//$removeQuery = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+		$query = "DELETE FROM `account` WHERE `acc_id`='".$_GET['userID']."'" ;
+		$removeQuery = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 		echo "<br clear='left'/>";
 		echo "<font size='20'><p>Account removed</p></font>";
 		echo "<table border='1'style='width:90%'>";

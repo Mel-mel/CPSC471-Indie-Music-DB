@@ -63,7 +63,7 @@ function getInput($data)
 		<ul class="dropdown-menu">
 			<li><a target="" href="viewAccount.php">View Account</a></li>
 			<li><a target="" href="editAccount.php">Edit Account</a></li>
-			<li><a target="" href="uploadSong.php">Upload a Song</a></li>
+			<li><a target="" href="createSong.php">Upload a Song</a></li>
 			<li><a target="" href="logout.php">Logout</a></li>
 		</ul>
 	</li>
