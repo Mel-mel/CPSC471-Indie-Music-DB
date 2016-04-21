@@ -84,15 +84,5 @@ function getInput($data)
 	<input type="submit" value="Cancel" style="position:relative;left:15px;top:281px;">
 </form>
 
-<form action="deleteSong.php" method="post">
-	<fieldset>
-		<legend> Delete Song </legend>
-		Song Name:<br>
-		<input type="text" name="song" required><br>
-		<input type="submit" value="Delete" style="position:relative;left:120px;top:2px;">
-	</fieldset>
-	
-</form>
-
 </body>
 </html>
