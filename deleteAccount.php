@@ -103,7 +103,7 @@ function getInput($data)
 ?>
 
 <form action="viewDeleteAccount.php">
-	<input type="submit" value="Go back to main" style="position:relative;left:0px;top:240px;font-size:20px">
+	<input type="submit" value="Go back" style="position:relative;left:0px;top:240px;font-size:20px">
 </form>
 
 <form action="" method="post">
