@@ -64,6 +64,7 @@ function getInput($data)
 			<li><a target="" href="viewAccount.php">View Account</a></li>
 			<li><a target="" href="editAccount.php">Edit Account</a></li>
 			<li><a target="" href="createSong.php">Upload a Song</a></li>
+			<li><a target="" href="editSong.php">Edit Songs</a></li>
 			<li><a target="" href="viewDeleteSong.php">Remove a Song</a></li>
 			<li><a target="" href="logout.php">Logout</a></li>
 		</ul>

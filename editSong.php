@@ -19,13 +19,17 @@
 <body>
 
 <?php
-$songname = $song_descrip = $genre = "";
-viewSong($db);
+$songname = $song_descrip = $genre = $songID = "";
+
+displaySongList($db);
+
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	$songname = getInput($_POST["song"]);
 	$song_descrip = getInput($_POST["description"]);
 	$genre = getInput($_POST["genre"]);
+	
+	$query = "SELECT `song_id` FROM `song` WHERE `song_name`='";
 
 }
 if(isset($_POST['song']))
@@ -67,28 +71,46 @@ if(isset($_POST['genre']))
 	}
 	header("Refresh:0");//Refresh the page
 }
-function viewSongs($db)
+function displaySongList($db)
 {
-	$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE (`song_name`='" .$_SESSION["songname"]. "' AND `song_id`='".$_SESSION["songID"]."')";
-	$runQuery = mysqli_query($db, $inQuery);
+	//Get account id so that it can be used to get all the songs that the current account id holds
+	//in the "upload" table
 	
-	while($row = mysqli_fetch_assoc($runQuery))
+	//Get list of songs that belong to the account id. Then use the list of songids to get the list of songs
+	//belong to the account id
+	
+	
+	//Get list of songs that belong to the current account id in a session
+	$list = "SELECT `song_id` FROM `upload` WHERE `acc_id`='".$_SESSION["accountID"]."'";
+	$listResult = mysqli_query($db, $list);
+	
+	//For each song_id, display information on each song
+	while($row = mysqli_fetch_assoc($listResult))
 	{
-		echo "<table border='1'style='width:35%'>";
-		echo "<tr>";
-		echo "<td>"."Song name:   ".$row["song_name"]. "</td>";
-		echo "</tr>";
-		echo "<tr>";
-		echo "<td>"."Description:   ".$row["song_descrip"]. "</td>";
-		echo "</tr>";
-		echo "<tr>";
-		echo "<td>"."File Format:   ".$row["file_format"]. "</td>";
-		echo "</tr>";
-		echo "<tr>";
-		echo "<td>"."Genre:   ".$row["genre"]. "</td>";
-		echo "</tr>";	
-		echo "</table>";
+		$display = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row["song_id"]."'";
+		$result = mysqli_query($db, $display);
+		while($row2 = mysqli_fetch_assoc($result))
+		{
+			echo "<table border='1'style='width:90%'>";
+			echo "<tr>";
+			echo "<th>Song name</th>";
+			echo "<th>Song Description</th>";
+			echo "<th>File format</th>";
+			echo "<th>Genre</th>";
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td>".$row2["song_name"]. "</td>";
+			echo "<td>".$row2["song_descrip"]. "</td>";
+			echo "<td>".$row2["file_format"]. "</td>";
+			echo "<td>".$row2["genre"]. "</td>";
+			echo "</tr>";
+			echo "</table>";
+			echo "<a href='doEdits.php?songID=".$row["song_id"]."'>Edit Song</a>";
+			echo "<br>";
+			echo "<br>";
+		}
 	}
+	
 }
 
 function getInput($data)
@@ -102,16 +124,6 @@ function getInput($data)
 
 <form action="mainPage.php">
 	<input type="submit" value="Cancel edits" style="position:relative;left:0px;top:240px;">
-</form>
-
-<form action="" method="post">
-	Song name:<br>
-	<input type="text" name="song"><br>
-	Description:<br>
-	<input type="text" name="description"><br>
-	Genre:<br>
-	<input type="text" name="genre"><br>
-	<input type="submit" value="Save edits" style="position:relative;left:120px;top:25px;">
 </form>
 
 </body>

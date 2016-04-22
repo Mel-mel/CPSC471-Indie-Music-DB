@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		//DELETE FROM `upload` WHERE `song_id`=13 AND `acc_id`=31
 		
-		//Remove the song from the localhost location. aka in musicFiles
+		//Remove the song from the localhost location. aka in their account name folder
 		//First get the file name and append it to it's containing folder
 		$query = "SELECT `file_format` FROM `song` WHERE `song_id`='".$_GET['songID']."'";
 		$result = mysqli_query($db, $query);
