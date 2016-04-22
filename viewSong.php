@@ -9,11 +9,21 @@
 <body>
 
 <?php
-viewSongs($db);
-function viewSongs($db)
+
+displaySong($db);
+
+
+function displaySong($db)
 {
-	$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE (`song_name`='" .$_SESSION["songname"]. "' AND `song_id`='".$_SESSION["songID"]."')";
+
+	//Get the name of the artist for each song
+	$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$_GET['accID']."'";
+	$accResult = mysqli_query($db, $accQuery);
+	$accID = mysqli_fetch_assoc($accResult);
+	
+	$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$_GET["songID"]."'";
 	$runQuery = mysqli_query($db, $inQuery);
+	
 	
 	while($row = mysqli_fetch_assoc($runQuery))
 	{
@@ -28,7 +38,7 @@ function viewSongs($db)
 		echo "<td>"."File Format:   ".$row["file_format"]. "</td>";
 		echo "</tr>";
 		echo "<tr>";
-		echo "<td>"."Genre:   ".$row["genre"]. "</td>";
+		echo "<td>"."<b>Artist:   ".$accID["acc_name"]. "</b></td>";
 		echo "</tr>";	
 		echo "</table>";
 	}
@@ -36,7 +46,7 @@ function viewSongs($db)
 }
 ?>
 
-<form action="mainPage.php">
+<form action="showAllSongs.php">
 	<input type="submit" value="Back to Main" style="position:relative;left:0px;top:50px;">
 </form>
 

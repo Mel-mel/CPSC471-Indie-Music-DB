@@ -73,7 +73,7 @@ function getInput($data)
 </div>
 
 
-
+<a href="showAllSongs.php" style="font-size: 30px;">View All Songs</a>
 
 
 
