@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	else
 	{
-		header("Location: viewDeleteSong.php");
+		header("Location: adminviewDeleteSong.php");
 	}
 }
 
@@ -130,7 +130,7 @@ function getInput($data)
 
 ?>
 
-<form action="viewDeleteSong.php">
+<form action="adminviewDeleteSong.php">
 	<input type="submit" value="Go back" style="position:relative;left:0px;top:240px;font-size:20px">
 </form>
 

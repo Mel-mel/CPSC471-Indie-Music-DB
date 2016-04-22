@@ -33,6 +33,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	else
 	{
+		//Create a directory for the user
+		mkdir("".$username."/", 0700);
 		//header("Location: loginPage.php");
 		echo "<font size='14'>Account created successfully!<br></font>" ."<a href='loginPage.php'><font size='12'>Click here to Login</font></a>";
 	}
