@@ -66,21 +66,6 @@ function displaySong($db)
 	echo "<source src='".$path."' type='audio/".$file_ext."'>" ;
 	echo "</audio>";
 	
-	echo "
-		<form action='' style='position:relative;left:300px;'>
-			<input type='radio' name='rate' value='1star'>
-			1 Star
-			<input type='radio' name='rate' value='2star'>
-			2 Star
-			<input type='radio' name='rate' value='3star'>
-			3 Star
-			<input type='radio' name='rate' value='4star'>
-			4 Star
-			<input type='radio' name='rate' value='5star'>
-			5 Star
-		</form>
-	";
-	
 }
 
 
