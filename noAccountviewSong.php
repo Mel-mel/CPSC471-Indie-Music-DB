@@ -53,8 +53,8 @@ function displaySong($db)
 	
 	//Return button to the list of songs
 	echo "
-		<form action='showAllSongs.php'>
-		<input type='submit' value='Back to Main' style='position:relative;left:0px;top:200px;'>
+		<form action='noAccountAllSongs.php'>
+		<input type='submit' value='Go Back' style='position:relative;left:0px;top:200px;'>
 		</form>
 	";
 	
@@ -85,11 +85,6 @@ function displaySong($db)
 
 
 ?>
-
-
-
-
-
 
 </body>
 </html>

@@ -136,7 +136,9 @@ function getInput($data)
 	<input type="submit" value="Create an account" style="position:relative;left:5px;top:-5px;font-size:20px">
 </form>
 
+<h3> OR </h3>
 
+<a href="noAccountAllSongs.php" style="font-size:30px"> View all Songs without an account </a>
 
 <!--title will show up when you mouse over the text in that paragraph -->
 <p title ="Random stuff"> My first paragraph </p>
