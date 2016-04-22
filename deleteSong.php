@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$removeQuery = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 		echo "<br clear='left'/>";
 		echo "<font size='20'><p>Song removed</p></font>";
-		echo "<table border='1'style='width:90%'>";
+		echo "<table border='1'style='width:40%'>";
 		echo "<tr>";
 		echo "<th>Song name</th>";
 		echo "<th>Song Description</th>";
@@ -100,7 +100,7 @@ function viewList($db)
 
 	while($row = mysqli_fetch_assoc($runQuery))
 	{
-		echo "<table border='1'style='width:90%'>";
+		echo "<table border='1'style='width:40%'>";
 		echo "<tr>";
 		echo "<th>Song name</th>";
 		echo "<th>Song Description</th>";

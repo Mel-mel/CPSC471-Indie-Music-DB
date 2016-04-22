@@ -37,7 +37,7 @@ $inQuery = "SELECT `acc_id`, `acc_name`, `real_name`, `country`, `birth_date`,`e
 		}
 		else
 		{
-			echo "<table border='1'style='width:90%'>";
+			echo "<table border='1'style='width:40%'>";
 			echo "<tr>";
 			echo "<th>Account name</th>";
 			echo "<th>"."Real name"."</th>";

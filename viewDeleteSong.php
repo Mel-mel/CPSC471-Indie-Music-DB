@@ -49,7 +49,7 @@ function displaySongList($db)
 		$result = mysqli_query($db, $display);
 		while($row2 = mysqli_fetch_assoc($result))
 		{
-			echo "<table border='1'style='width:90%'>";
+			echo "<table border='1'style='width:40%'>";
 			echo "<tr>";
 			echo "<th>Song name</th>";
 			echo "<th>Song Description</th>";

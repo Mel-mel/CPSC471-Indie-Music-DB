@@ -29,7 +29,7 @@ function viewSongs($db)
 	
 		while($row2 = mysqli_fetch_assoc($runQuery))
 		{
-			echo "<table border='1'style='width:35%'>";
+			echo "<table border='1'style='width:15%'>";
 			echo "<tr>";
 			echo "<td>"."Song name:   <b>".$row2["song_name"]. "</b></td>";
 			echo "</tr>";
