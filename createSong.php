@@ -67,7 +67,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	$upQuery = "INSERT INTO Upload (song_id, acc_id) VALUES ('".$songResults["song_id"]."', '".$_SESSION["accountID"]."')";
 	$result2 = mysqli_query($db, $upQuery, MYSQLI_STORE_RESULT);
 	
-	if($result === false || $result2 === false)
+	//Add account id and song id to the rate_out_of_five table for the rating system
+	$query = "INSERT INTO rate_out_of_five (acc_id, song_id) VALUES('".$_SESSION['accountID']."', '".$songResults['song_id']."')";
+	$result3 = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+	
+	if($result === false || $result2 === false || $result3 === false)
 	{
 		echo "There is an error with the query.";
 	}

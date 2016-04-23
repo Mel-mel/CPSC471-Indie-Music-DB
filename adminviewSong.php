@@ -172,7 +172,7 @@ function displaySong($db)
 	
 	//Return button to the list of songs
 	echo "
-		<form action='showAllSongs.php'>
+		<form action='adminshowAllSongs.php'>
 		<input type='submit' value='Back to Main' style='position:relative;left:0px;top:200px;'>
 		</form>
 	";

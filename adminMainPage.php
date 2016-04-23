@@ -74,7 +74,7 @@ function getInput($data)
 </ul>
 </div>
 
-
+<a href="adminshowAllSongs.php" style="font-size: 30px;">View All Songs</a>
 
 
 
