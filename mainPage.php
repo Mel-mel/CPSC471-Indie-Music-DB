@@ -28,20 +28,80 @@
 	</head>
 <body>
 
+<div class="container">
+<ul class="nav nav-pills nav-stacked navbar-right" >
+	<li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account
+		<span class="caret"></span></a>
+		<ul class="dropdown-menu">
+			<li><a target="" href="viewAccount.php">View Account</a></li>
+			<li><a target="" href="editAccount.php">Edit Account</a></li>
+			<li><a target="" href="createSong.php">Upload a Song</a></li>
+			<li><a target="" href="editSong.php">Edit Songs</a></li>
+			<li><a target="" href="viewDeleteSong.php">Remove a Song</a></li>
+			<li><a target="" href="MyPlayList.php">Edit Playlists</a></li>
+			<li><a target="" href="logout.php">Logout</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<a href="showAllSongs.php" style="font-size:30px; position:relative;left:250px;">View All Songs</a>
+
+<p style='font-size:24px;color:purple;'>Best rated songs</p>
+
+
 <?php
-//Defining variables set to a default of null
-$username = $password = "";
-	
-if($_SERVER["REQUEST_METHOD"] == "POST")
+displayBestSongs($db);
+
+function displayBestSongs($db)
 {
-	
-	$username = getInput($_POST["user"]);
-	$password = getInput($_POST["pw"]);
-	
+	//Get list of all song ids
+	$query = "SELECT `song_id`, `acc_id` FROM `upload`";
+	$result = mysqli_query($db, $query);
 
 	
+	while($row = mysqli_fetch_assoc($result))
+	{
+		//Get the name of the artist for each song
+		$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row['acc_id']."'";
+		$accResult = mysqli_query($db, $accQuery);
+		$accID = mysqli_fetch_assoc($accResult);
+	
+		//Get the order of the songs based on highest 5 star rating
+		$query = "SELECT `5star`, `song_id` FROM `rate_out_of_five` ORDER BY 5star DESC";
+		$result = mysqli_query($db, $query);
+		
+		while($row1 = mysqli_fetch_assoc($result))
+		{
+			//Display the song information based on descending order
+			$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row1['song_id']."'";
+			$runQuery = mysqli_query($db, $inQuery);
+		
+			while($row2 = mysqli_fetch_assoc($runQuery))
+			{
+				echo "<table border='1'style='width:15%'>";
+				echo "<tr>";
+				echo "<td>"."Song name:   <b>".$row2["song_name"]. "</b></td>";
+				echo "</tr>";
+				echo "<tr>";
+				echo "<td>"."Genre:   ".$row2["genre"]. "</td>";
+				echo "</tr>";	
+				echo "<tr>";
+				echo "<td>"."<b>Artist:   ".$accID["acc_name"]. "</b></td>";
+				echo "</tr>";
+				
+				echo "</table>";
+				echo "<a href='viewSong.php?songID=".$row["song_id"]."'style='position:relative;left:280px;top:-50px;font-size:26px;'>Listen</a>";
+				echo "<br>";
+			}
+		}
+	
+		
+	}
 	
 }
+
 function getInput($data)
 {
 	$data = trim($data);
@@ -55,53 +115,8 @@ function getInput($data)
 
 
 
-<div class="container">
-<ul class="nav nav-pills nav-stacked navbar-right" >
-	<li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">My Account
-		<span class="caret"></span></a>
-		<ul class="dropdown-menu">
-			<li><a target="" href="viewAccount.php">View Account</a></li>
-			<li><a target="" href="editAccount.php">Edit Account</a></li>
-			<li><a target="" href="createSong.php">Upload a Song</a></li>
-			<li><a target="" href="editSong.php">Edit Songs</a></li>
-			<li><a target="" href="viewDeleteSong.php">Remove a Song</a></li>
-			<li><a target="" href="logout.php">Logout</a></li>
-		</ul>
-	</li>
-</ul>
-</div>
-
-
-<a href="showAllSongs.php" style="font-size: 30px;">View All Songs</a>
-
-
-
-<!--
-<table style="width:100%">
-  <caption>Monthly savings</caption>
-  <tr>
-    <th>Month</th>
-    <th>Savings</th>
-  </tr>
-  <tr>
-    <td>January</td>
-    <td>$100</td>
-  </tr>
-  <tr>
-    <td>February</td>
-    <td>$50</td>
-  </tr>
-</table>
-
-<!--title will show up when you mouse over the text in that paragraph -->
-<p title ="Random stuff"> My first paragraph </p>
-<p><b>Just another random sentence that's bolded</b></p>
-
 
 
 
 </body>
 </html>
-
-<!--Search up website layout for html for some basic layouts -->

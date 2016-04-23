@@ -142,7 +142,7 @@
 		<div style="background:url(i/mr.gif) no-repeat 100% 0px;">
 			<img src="i/logo2.gif" width="271" height="41" border="0" alt="" style="float:left;"/>
 			<div style="float:right;margin-right:0px;margin-top:19px;">
-				<a href="admineditAccount.php"><?php echo $username."'s Account" ?></a> 
+				<a href="editAccount.php"><?php echo $username."'s Account" ?></a> 
 			</div>
 		</div>
 	</div>

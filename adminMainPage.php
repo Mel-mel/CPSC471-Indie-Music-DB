@@ -77,33 +77,5 @@ function getInput($data)
 <a href="adminshowAllSongs.php" style="font-size: 30px;">View All Songs</a>
 
 
-
-
-<!--
-<table style="width:100%">
-  <caption>Monthly savings</caption>
-  <tr>
-    <th>Month</th>
-    <th>Savings</th>
-  </tr>
-  <tr>
-    <td>January</td>
-    <td>$100</td>
-  </tr>
-  <tr>
-    <td>February</td>
-    <td>$50</td>
-  </tr>
-</table>
-
-<!--title will show up when you mouse over the text in that paragraph -->
-<p title ="Random stuff"> My first paragraph </p>
-<p><b>Just another random sentence that's bolded</b></p>
-
-
-
-
 </body>
 </html>
-
-<!--Search up website layout for html for some basic layouts -->

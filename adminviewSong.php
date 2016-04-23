@@ -29,7 +29,7 @@ if(isset($_POST['1star']))
 	$total = $value['c1'] + $count;
 	echo $total;
 	//Store updated value back into the rate out of five table
-	$query = "UPDATE `rate_out_of_five` SET `1star`=".$total."";
+	$query = "UPDATE `rate_out_of_five` SET `1star`=".$total." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 	
 	calcTotal($db);
@@ -46,7 +46,7 @@ if(isset($_POST['2star']))
 	$total = $value['c2'] + $count;
 	
 	//Store updated value back into the rate out of five table
-	$query = "UPDATE `rate_out_of_five` SET `2star`=".$total."";
+	$query = "UPDATE `rate_out_of_five` SET `2star`=".$total." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 	
 	calcTotal($db);
@@ -63,7 +63,7 @@ if(isset($_POST['3star']))
 	$total = $value['c3'] + $count;
 	
 	//Store updated value back into the rate out of five table
-	$query = "UPDATE `rate_out_of_five` SET `3star`=".$total."";
+	$query = "UPDATE `rate_out_of_five` SET `3star`=".$total." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 	
 	calcTotal($db);
@@ -80,7 +80,7 @@ if(isset($_POST['4star']))
 	$total = $value['c4'] + $count;
 	
 	//Store updated value back into the rate out of five table
-	$query = "UPDATE `rate_out_of_five` SET `4star`=".$total."";
+	$query = "UPDATE `rate_out_of_five` SET `4star`=".$total." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 	
 	calcTotal($db);
@@ -97,7 +97,7 @@ if(isset($_POST['5star']))
 	$total = $value['c5'] + $count;
 	
 	//Store updated value back into the rate out of five table
-	$query = "UPDATE `rate_out_of_five` SET `5star`=".$total."";
+	$query = "UPDATE `rate_out_of_five` SET `5star`=".$total." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 	
 	calcTotal($db);
@@ -127,7 +127,7 @@ function calcTotal($db)
 	//Add up the total rating and store it
 	$totalrating = $result1['c1'] + $result2['c2'] + $result3['c3'] + $result4['c4'] + $result5['c5'];
 	
-	$query = "UPDATE `rate_out_of_five` SET `totalRating`=".$totalrating."";
+	$query = "UPDATE `rate_out_of_five` SET `totalRating`=".$totalrating." WHERE `song_id`='".$_GET['songID']."'";
 	$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 }
 
