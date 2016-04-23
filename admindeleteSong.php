@@ -51,6 +51,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$query = "DELETE FROM `upload` WHERE `song_id`='".$_GET['songID']."' AND `acc_id`='".$_SESSION["accountID"]."'";
 		$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 		
+		//Remove the song id and acc id from rate out of five
+		$query = "DELETE FROM `rate_out_of_five` WHERE `song_id`='".$_GET['songID']."' AND `acc_id`='".$_SESSION["accountID"]."'";
+		$result = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+		
 		//After removing the song id and account id from upload, can now remove the song from the song table
 		//(Since the upload table prevents songs from being delete before it. It's the foreign acc_id)
 		$query = "DELETE FROM `song` WHERE `song_id`='".$_GET['songID']."'" ;
