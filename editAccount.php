@@ -102,8 +102,17 @@ function editAccountName($db, $accname)
 	}
 	else
 	{
+        //Also need to change the old name of the folder to the new name of the folder
+        $query = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$_SESSION['accountID']."'";
+        $result = mysqli_query($db, $query);
+        $oldname = mysqli_fetch_assoc($result);
+        
+        //Rename the folder to the new name
+        rename($oldname['acc_name'], $accname);
+        
 		$inQuery = "UPDATE `account` SET `acc_name`='".$accname."' WHERE `acc_id`='".$_SESSION['accountID']."'";
 		$runQuery = mysqli_query($db, $inQuery, MYSQLI_STORE_RESULT);
+        
 	}
 	
 }
