@@ -27,29 +27,7 @@
 </style>
 	</head>
 <body>
-
 <?php
-//Defining variables set to a default of null
-$username = $password = "";
-	
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-	
-	$username = getInput($_POST["user"]);
-	$password = getInput($_POST["pw"]);
-	
-
-	
-	
-}
-function getInput($data)
-{
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-}
-
 //This is to insert an admin 
 //INSERT INTO `administrator`(`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES (12,'admin', 111,'administrator','unknown','unknown','admin@music.com')
 ?>
@@ -67,6 +45,7 @@ function getInput($data)
 			<li><a target="" href="adminCreateSong.php">Upload a Song</a></li>
 			<li><a target="" href="admineditSong.php">Edit Songs</a></li>
 			<li><a target="" href="adminviewDeleteSong.php">Remove a Song</a></li>
+			<li><a target="" href="adminMyPlayList.php">Edit Playlists</a></li>
 			<li><a target="" href="viewDeleteAccount.php">Remove an account</a></li>
 			<li><a target="" href="logout.php">Logout</a></li>
 		</ul>
@@ -74,8 +53,125 @@ function getInput($data)
 </ul>
 </div>
 
-<a href="adminshowAllSongs.php" style="font-size: 30px;">View All Songs</a>
+<a href="adminshowAllSongs.php" style="font-size: 30px;position:relative;left:280px;top:-50px;">View All Songs</a>
+
+<?php
+displayBestSongs($db);
+displayNewestSongs($db);
+
+function displayNewestSongs($db)
+{
+	echo "<p id='p2' >Newest Songs</p>";
+	
+	
+	//Get the order of the songs based on totalrating
+	$query = "SELECT `totalRating`, `song_id` FROM `rate_out_of_five` ORDER BY totalRating ASC";
+	$result = mysqli_query($db, $query);
+	
+	while($row = mysqli_fetch_assoc($result))
+	{
+		if($row['totalRating'] < 5)
+		{
+			//Get list of all song ids
+			$query1 = "SELECT `song_id`, `acc_id` FROM `upload` WHERE `song_id`='".$row['song_id']."'";
+			$result1 = mysqli_query($db, $query1);
+			
+			while($row1 = mysqli_fetch_assoc($result1))
+			{
+				//Get the name of the artist for each song
+				$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row1['acc_id']."'";
+				$accResult = mysqli_query($db, $accQuery);
+				$accID = mysqli_fetch_assoc($accResult);
+			
+				//Display the song information based on descending order
+				$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row['song_id']."'";
+				$runQuery = mysqli_query($db, $inQuery);
+			
+				while($row2 = mysqli_fetch_assoc($runQuery))
+				{
+					echo "<table id='t2' border='1'>";
+					echo "<tr>";
+					echo "<td>"."Song name:   <b>".$row2["song_name"]. "</b></td>";
+					echo "</tr>";
+					echo "<tr>";
+					echo "<td>"."Genre:   ".$row2["genre"]. "</td>";
+					echo "</tr>";	
+					echo "<tr>";
+					echo "<td>"."<b>Artist:   ".$accID["acc_name"]. "</b></td>";
+					echo "</tr>";
+					
+					echo "</table>";
+					echo "<a href='viewSong.php?songID=".$row["song_id"]."' id='listen2'>Listen</a>";
+					echo "<br>";
+				}
+			}
+		}
+		
+		else
+		{
+			//Don't display current song since it's not the newest anymore
+		}
+	}
+	
+}
 
 
+function displayBestSongs($db)
+{
+	echo "<p style='font-size:24px;color:purple;'>Best rated songs</p>";
+
+	//Get the order of the songs based on highest 5 star rating
+	$query = "SELECT `5star`, `song_id` FROM `rate_out_of_five` ORDER BY 5star DESC";
+	$result = mysqli_query($db, $query);
+	
+	while($row = mysqli_fetch_assoc($result))
+	{
+		//Get list of all song ids
+		$query = "SELECT `song_id`, `acc_id` FROM `upload`";
+		$result = mysqli_query($db, $query);
+		
+		while($row1 = mysqli_fetch_assoc($result))
+		{
+			//Get the name of the artist for each song
+			$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row1['acc_id']."'";
+			$accResult = mysqli_query($db, $accQuery);
+			$accID = mysqli_fetch_assoc($accResult);
+		
+			//Display the song information based on descending order
+			$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row1['song_id']."'";
+			$runQuery = mysqli_query($db, $inQuery);
+		
+			while($row2 = mysqli_fetch_assoc($runQuery))
+			{
+				echo "<table border='1'style='width:15%'>";
+				echo "<tr>";
+				echo "<td>"."Song name:   <b>".$row2["song_name"]. "</b></td>";
+				echo "</tr>";
+				echo "<tr>";
+				echo "<td>"."Genre:   ".$row2["genre"]. "</td>";
+				echo "</tr>";	
+				echo "<tr>";
+				echo "<td>"."<b>Artist:   ".$accID["acc_name"]. "</b></td>";
+				echo "</tr>";
+				
+				echo "</table>";
+				echo "<a href='viewSong.php?songID=".$row["song_id"]."'style='position:relative;left:280px;top:-50px;font-size:26px;'>Listen</a>";
+				echo "<br>";
+			}
+		}
+	
+		
+	}
+	
+}
+function getInput($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+?>
 </body>
 </html>

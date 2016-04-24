@@ -48,32 +48,94 @@
 
 <a href="showAllSongs.php" style="font-size:30px; position:relative;left:250px;">View All Songs</a>
 
-<p style='font-size:24px;color:purple;'>Best rated songs</p>
+<form action="searchDatabase.php" method="post" style="position:relative;left:900px;">
+	<input type="text" name="search">
+	<input type="submit" value="Search">
+</form>
 
 
 <?php
 displayBestSongs($db);
+displayNewestSongs($db);
 
-function displayBestSongs($db)
+function displayNewestSongs($db)
 {
-	//Get list of all song ids
-	$query = "SELECT `song_id`, `acc_id` FROM `upload`";
+	echo "<p id='p1' >Newest Songs</p>";
+	
+	
+	//Get the order of the songs based on totalrating
+	$query = "SELECT `totalRating`, `song_id` FROM `rate_out_of_five` ORDER BY totalRating ASC";
 	$result = mysqli_query($db, $query);
-
 	
 	while($row = mysqli_fetch_assoc($result))
 	{
-		//Get the name of the artist for each song
-		$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row['acc_id']."'";
-		$accResult = mysqli_query($db, $accQuery);
-		$accID = mysqli_fetch_assoc($accResult);
+		if($row['totalRating'] < 5)
+		{
+			//Get list of all song ids
+			$query1 = "SELECT `song_id`, `acc_id` FROM `upload` WHERE `song_id`='".$row['song_id']."'";
+			$result1 = mysqli_query($db, $query1);
+			
+			while($row1 = mysqli_fetch_assoc($result1))
+			{
+				//Get the name of the artist for each song
+				$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row1['acc_id']."'";
+				$accResult = mysqli_query($db, $accQuery);
+				$accID = mysqli_fetch_assoc($accResult);
+			
+				//Display the song information based on descending order
+				$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row['song_id']."'";
+				$runQuery = mysqli_query($db, $inQuery);
+			
+				while($row2 = mysqli_fetch_assoc($runQuery))
+				{
+					echo "<table id='t1' border='1'>";
+					echo "<tr>";
+					echo "<td>"."Song name:   <b>".$row2["song_name"]. "</b></td>";
+					echo "</tr>";
+					echo "<tr>";
+					echo "<td>"."Genre:   ".$row2["genre"]. "</td>";
+					echo "</tr>";	
+					echo "<tr>";
+					echo "<td>"."<b>Artist:   ".$accID["acc_name"]. "</b></td>";
+					echo "</tr>";
+					
+					echo "</table>";
+					echo "<a href='viewSong.php?songID=".$row["song_id"]."' id='listen1'>Listen</a>";
+					echo "<br>";
+				}
+			}
+		}
+		
+		else
+		{
+			//Don't display current song since it's not the newest anymore
+		}
+	}
 	
-		//Get the order of the songs based on highest 5 star rating
-		$query = "SELECT `5star`, `song_id` FROM `rate_out_of_five` ORDER BY 5star DESC";
+}
+
+
+function displayBestSongs($db)
+{
+	echo "<p style='font-size:24px;color:purple;'>Best rated songs</p>";
+
+	//Get the order of the songs based on highest 5 star rating
+	$query = "SELECT `5star`, `song_id` FROM `rate_out_of_five` ORDER BY 5star DESC";
+	$result = mysqli_query($db, $query);
+	
+	while($row = mysqli_fetch_assoc($result))
+	{
+		//Get list of all song ids
+		$query = "SELECT `song_id`, `acc_id` FROM `upload`";
 		$result = mysqli_query($db, $query);
 		
 		while($row1 = mysqli_fetch_assoc($result))
 		{
+			//Get the name of the artist for each song
+			$accQuery = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$row1['acc_id']."'";
+			$accResult = mysqli_query($db, $accQuery);
+			$accID = mysqli_fetch_assoc($accResult);
+		
 			//Display the song information based on descending order
 			$inQuery = "SELECT `song_name`, `song_descrip`, `file_format`, `genre` FROM `song` WHERE `song_id`='".$row1['song_id']."'";
 			$runQuery = mysqli_query($db, $inQuery);

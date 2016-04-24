@@ -28,3 +28,53 @@ th, td {
 	padding: 5px;
 	text-align: left;
 }
+
+table#t1
+{
+	width:15%;
+	
+	position:relative;
+	top:-900px;
+	left:500px;
+}
+table#t2
+{
+	width:15%;
+	position:relative;
+	top:-900px;
+	left:500px;
+}
+
+p#p1
+{
+
+	font-size:24px;
+	color:green;
+	position:absolute;
+	top:120px;
+	left:500px;
+}
+p#p2
+{
+	font-size:24px;
+	color:green;
+	position:absolute;
+	top:180px;
+	left:500px;
+}
+
+a#listen2
+{
+	position:relative;
+	left:780px;
+	top:-950px;
+	font-size:26px;
+}
+
+a#listen1
+{
+	position:relative;
+	left:780px;
+	top:-950px;
+	font-size:26px;
+}

@@ -15,11 +15,11 @@
 		   		
 		    	if (confirm( ps) == true) {
 			     		//delete 
-			    	  window.location.assign(getUrl( "deleteSongFromPlayList.php",userid,listid,newRow));
+			    	  window.location.assign(getUrl( "admindeleteSongFromPlayList.php",userid,listid,newRow));
 			    }
 			}
 			else 
-		    	window.location.assign(getUrl("SongofList.php",userid,listid,newRow));
+		    	window.location.assign(getUrl("adminSongofList.php",userid,listid,newRow));
 		   
 		}
 		function getUrl(urlStart,acc_id,listid,songid)
@@ -33,7 +33,7 @@
 			var desc = document.getElementById("text_desc").value;
 			var sort = document.getElementById("text_sort").value;
 				
-			var url="savePlaylist.php";
+			var url="adminsavePlaylist.php";
 			url=url.concat("?listid=").concat(listid);
 			url=url.concat("&name=").concat(listname);
 			url=url.concat("&desc=").concat(desc)
@@ -72,8 +72,8 @@
 		<div style="background:url(i/mr.gif) no-repeat 100% 0px;">
 			<img src="i/logo2 - 1.gif" width="271" height="41" border="0" alt="" style="float:left;"/>
 			<div style="float:right;margin-right:0px;margin-top:19px;">
-				<a href="MyPlaylist.php?<?php echo '?listid='.$listid ?>">My Playlist</a> 
-				<a href="editAccount.php"><?php echo $username."'s Account" ?></a> 
+				<a href="adminMyPlaylist.php?<?php echo '?listid='.$listid ?>">My Playlist</a> 
+				<a href="admineditAccount.php"><?php echo $username."'s Account" ?></a> 
 			</div>
 		</div>
 	</div>
@@ -121,7 +121,7 @@
 					  		  		
 		    	if($listid!=-1){
 			    	echo "<div style='float:right;margin-right:25px;margin-top:0px;'>";
-				   	echo "	<a href='SearchSong.php?listid=" .$listid."&insearch=0&name=&format=&genre=&desc=' >Find more songs</a> "	;	
+				   	echo "	<a href='adminsearchSong.php?listid=" .$listid."&insearch=0&name=&format=&genre=&desc=' >Find more songs</a> "	;	
 					echo "</div>";
 				}
 							

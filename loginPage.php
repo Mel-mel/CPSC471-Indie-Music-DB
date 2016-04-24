@@ -138,15 +138,9 @@ function getInput($data)
 
 <h3> OR </h3>
 
-<a href="noAccountAllSongs.php" style="font-size:30px"> View all Songs without an account </a>
+<a href="noAccountAllSongs.php" style="font-size:30px"> View all Songs without an account </a><br>
 
-<!--title will show up when you mouse over the text in that paragraph -->
-<p title ="Random stuff"> My first paragraph </p>
-<p><b>Just another random sentence that's bolded</b></p>
-
-
-<!--<img src="images/senpai.gif" alt="shark-chan" style="width:480px;height:360px;">-->
-<img src="images/kill-you-so-hard.jpeg" alt="kill-you-so-hard" style="width:1440px;height:810px;">
+<img src="images/cool treble clef.jpg" style="width:236px;height:333px;">
 
 
 </body>
