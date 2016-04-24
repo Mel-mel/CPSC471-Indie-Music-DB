@@ -28,6 +28,100 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	
 	if(isset($_POST["yes"]))
 	{
+		//Delete folder containing user's music filesize
+		//First get the file name and append it to it's containing folder
+		
+		//Get list of songs from upload
+		$list = "SELECT `song_id` FROM `upload` WHERE `acc_id`='".$_GET['userID']."'";
+		$listresult = mysqli_query($db, $list);
+		
+		$user = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$_GET['userID']."'";
+		$name = mysqli_query($db, $user);
+		$username = mysqli_fetch_assoc($name);
+		
+		while($row = mysqli_fetch_assoc($listresult))
+		{
+			$query = "SELECT `file_format` FROM `song` WHERE `song_id`='".$row['song_id']."'";
+			$result = mysqli_query($db, $query);
+			$fileName = mysqli_fetch_assoc($result);
+			$filePath = "".$username['acc_name']."/".$fileName['file_format'];
+		
+			//Next, remove the file from that file path
+			if(unlink($filePath))
+			{
+				echo "Song successfully removed";
+			}
+			else
+			{
+				echo "Error, unable to remove song";
+			}
+			
+		}
+		$user = "SELECT `acc_name` FROM `account` WHERE `acc_id`='".$_GET['userID']."'";
+		$name = mysqli_query($db, $user);
+		$username = mysqli_fetch_assoc($name);
+		//Remove the directory belonging to the user
+		rmdir("'".$username['acc_name']."'");
+		
+		
+	
+		//Get all songs related to the deleted user
+		$songquery = "SELECT `song_id` FROM `upload` WHERE `acc_id`='".$_GET['userID']."'";
+		$songResult = mysqli_query($db, $songquery);
+		
+		$playquery = "SELECT `playlist_id` FROM `playlist` WHERE `acc_id`='".$_GET['userID']."'";
+		$playResult = mysqli_query($db, $playquery);
+		
+		while($row = mysqli_fetch_assoc($playResult))
+		{
+			//Remove song_id reference in createplaylist so that the playlists related to user can be deleted
+			while($row1 = mysqli_fetch_assoc($songResult))
+			{
+				//Delete all referenced songs from createplaylist
+				$query = "DELETE FROM `createplaylist` WHERE `playlist_id`='".$row['playlist_id']."' AND `song_id`='".$row1['song_id']."'";
+				$removedResult = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+				
+				$query = "DELETE FROM `playlist` WHERE `acc_id`='".$_GET['userID']."'";
+				$removedResult = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+				
+				if($removedResult === false)
+				{
+					echo "nafga";
+				}
+			}
+		}
+		
+		
+		//Delete playlists related to deleted user
+		$playquery = "DELETE FROM `playlist` WHERE `acc_id`='".$_GET['userID']."'";
+		$playResult = mysqli_query($db, $playquery, MYSQLI_STORE_RESULT);
+		echo "All playlists removed";
+		
+		$songquery = "SELECT `song_id` FROM `upload` WHERE `acc_id`='".$_GET['userID']."'";
+		$songResult = mysqli_query($db, $songquery);
+		while($row1 = mysqli_fetch_assoc($songResult))
+		{
+		echo $row1['song_id'];
+			//Delete any ratings from songs from deleted user
+			$ratequery = "DELETE FROM `rate_out_of_five` WHERE `acc_id`='".$_GET['userID']."'AND `song_id`='".$row1['song_id']."'";
+			$rateResult = mysqli_query($db, $ratequery, MYSQLI_STORE_RESULT);
+			echo "FGFDG";
+		}
+		echo "All ratings removed";
+		
+		//Delete all songs related to the delete user, starting with upload
+		$query = "DELETE FROM `upload` WHERE `acc_id`='".$_GET['userID']."'";
+		$removeQuery = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
+		
+		while($row2 = mysqli_fetch_assoc($songResult))
+		{
+			//Next delete the songs themselves from the table song
+			$songtable = "DELETE FROM `song` WHERE `song_id`='".$row2['song_id']."'";
+			$result = mysqli_query($db, $songtable, MYSQLI_STORE_RESULT);
+		}
+		echo "All songs removed";
+		
+		//Finally, delete the user from the account table 
 		$query = "DELETE FROM `account` WHERE `acc_id`='".$_GET['userID']."'" ;
 		$removeQuery = mysqli_query($db, $query, MYSQLI_STORE_RESULT);
 		echo "<br clear='left'/>";
@@ -48,6 +142,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		echo "<td> </td>";
 		echo "</tr>";
 		echo "</table>";
+		
+		
+		
 	}
 	else
 	{
