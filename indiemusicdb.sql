@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2016 at 06:32 AM
+-- Generation Time: Apr 24, 2016 at 05:46 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -41,7 +41,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES
-(8, 'bobby', '111', 'Bob', '', '', 'some email');
+(12, 'admin', '111', 'administrator', 'unknown', 'unknown', 'admin@music.com'),
+(33, 'joe', '12', 'john', 'Canada', '09/09/2000', 'joe@gg.com'),
+(34, 'ren-chon', '111', 'Renge', 'Japan', '10/05/2111', 'renchon@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -59,6 +61,13 @@ CREATE TABLE `administrator` (
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `administrator`
+--
+
+INSERT INTO `administrator` (`acc_id`, `acc_name`, `password`, `real_name`, `country`, `birth_date`, `email`) VALUES
+(12, 'admin', '111', 'administrator', 'unknown', 'unknown', 'admin@music.com');
+
 -- --------------------------------------------------------
 
 --
@@ -69,6 +78,18 @@ CREATE TABLE `createplaylist` (
   `song_id` int(11) NOT NULL,
   `playlist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `createplaylist`
+--
+
+INSERT INTO `createplaylist` (`song_id`, `playlist_id`) VALUES
+(39, 1),
+(39, 5),
+(40, 1),
+(40, 5),
+(41, 3),
+(41, 5);
 
 -- --------------------------------------------------------
 
@@ -110,10 +131,22 @@ CREATE TABLE `own` (
 
 CREATE TABLE `playlist` (
   `playlist_id` int(11) NOT NULL,
+  `acc_id` int(11) NOT NULL,
   `playlist_name` varchar(255) NOT NULL,
   `playlist_descrip` varchar(255) DEFAULT NULL,
   `sort_by` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `playlist`
+--
+
+INSERT INTO `playlist` (`playlist_id`, `acc_id`, `playlist_name`, `playlist_descrip`, `sort_by`) VALUES
+(1, 34, 'asdasd', 'asdasd', 'asdasd'),
+(3, 34, 'test 2', '222', '3433'),
+(5, 12, 'gggf', 'dfgdg', 'dfgdfgdgf'),
+(6, 12, '', '', ''),
+(7, 12, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -134,8 +167,28 @@ CREATE TABLE `rate` (
 
 CREATE TABLE `rate_out_of_five` (
   `acc_id` int(11) NOT NULL,
-  `song_id` int(11) NOT NULL
+  `song_id` int(11) NOT NULL,
+  `1star` int(11) NOT NULL,
+  `2star` int(11) NOT NULL,
+  `3star` int(11) NOT NULL,
+  `4star` int(11) NOT NULL,
+  `5star` int(11) NOT NULL,
+  `totalRating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rate_out_of_five`
+--
+
+INSERT INTO `rate_out_of_five` (`acc_id`, `song_id`, `1star`, `2star`, `3star`, `4star`, `5star`, `totalRating`) VALUES
+(12, 40, 0, 0, 1, 0, 10, 11),
+(33, 44, 0, 0, 0, 0, 0, 0),
+(33, 45, 0, 0, 0, 0, 0, 0),
+(34, 39, 0, 0, 1, 2, 6, 9),
+(34, 41, 0, 0, 0, 0, 0, 0),
+(34, 42, 0, 0, 0, 0, 0, 0),
+(34, 43, 0, 0, 0, 0, 0, 0),
+(34, 46, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -151,6 +204,20 @@ CREATE TABLE `song` (
   `genre` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `song`
+--
+
+INSERT INTO `song` (`song_id`, `song_name`, `song_descrip`, `file_format`, `genre`) VALUES
+(39, 'chocho', '123', 'STE-007.wav', 'background music'),
+(40, 'Ocean waves', 'water at the ocean', 'STE-002.wav', 'background music'),
+(41, 'first recorder', 'best recorder player ever', 'STE-008.wav', 'random'),
+(42, 'chocho', 'my first song with a recorder', 'STE-008.wav', 'random'),
+(43, 'something', 'best recorder player ever', 'STE-004.wav', 'background music'),
+(44, '123', '123', 'STE-008.wav', '123'),
+(45, 'recorder song', 'song about love', 'STE-000.wav', 'random'),
+(46, 'Ocean waves', 'water at the ocean', 'STE-010.wav', 'background music');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +228,20 @@ CREATE TABLE `upload` (
   `song_id` int(11) NOT NULL,
   `acc_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `upload`
+--
+
+INSERT INTO `upload` (`song_id`, `acc_id`) VALUES
+(40, 12),
+(44, 33),
+(45, 33),
+(39, 34),
+(41, 34),
+(42, 34),
+(43, 34),
+(46, 34);
 
 -- --------------------------------------------------------
 
@@ -269,17 +350,22 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `playlist_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `playlist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `song`
 --
 ALTER TABLE `song`
-  MODIFY `song_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `song_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
