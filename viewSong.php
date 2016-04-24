@@ -157,6 +157,9 @@ function displaySong($db)
 		echo "<tr>";
 		echo "<td>"."Artist:   <b>".$accName["acc_name"]. "</b></td>";
 		echo "</tr>";
+        echo "<tr>";
+		echo "<td>"."Genre:   ".$row["genre"]. "</td>";
+		echo "</tr>";
 		echo "<tr>";
 		echo "<td>"."Description:   ".$row["song_descrip"]. "</td>";
 		echo "</tr>";

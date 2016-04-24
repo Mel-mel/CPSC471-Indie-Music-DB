@@ -38,6 +38,9 @@ function displaySong($db)
 		echo "<tr>";
 		echo "<td>"."Artist:   <b>".$accName["acc_name"]. "</b></td>";
 		echo "</tr>";
+        echo "<tr>";
+		echo "<td>"."Genre:   ".$row["genre"]. "</td>";
+		echo "</tr>";
 		echo "<tr>";
 		echo "<td>"."Description:   ".$row["song_descrip"]. "</td>";
 		echo "</tr>";
@@ -57,9 +60,6 @@ function displaySong($db)
 		<input type='submit' value='Go Back' style='position:relative;left:0px;top:200px;'>
 		</form>
 	";
-	
-	//Force download of the file
-	echo "<a href='downloadSong.php?songID=".$_GET['songID']."' style='position:relative;left:300px;top:80px;'>Download Song</a>";
 	
 	//Play the audio file on website
 	echo "<audio controls style='position:relative;top:-20px;'>";
