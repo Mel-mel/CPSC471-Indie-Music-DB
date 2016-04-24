@@ -1,0 +1,18 @@
+=== HOW TO RUN AND USE THE WEBSITE ===
+SIDE NOTES:
+We did not use a public domain or public server to host the database. It only works
+on a local server via localhost.
+
+To run the website:
+ -First, make sure the indiemusicdb folder is in the respective htdocs folder
+  in order to run the website properly
+	 -Import the indiemusicdb.sql onto the phpmyadmin
+	 -You should be able to find this in the mass of files inside the indiemusicdb folder
+	 -(This will 'populate' the database with 3 accounts (2 users and 1 admin), some songs, 
+	 and some playlists)
+ -(the musicuser thing in phpmyadmin that kevin did?)
+ -Before running the site, make sure that Apache and MySQL are running with
+  whichever database programs you use (for us, we used xampp to run our website)
+ -Open a window and type in this to run the website:
+	localhost/indiemusicdb/loginPage.php
+ 
