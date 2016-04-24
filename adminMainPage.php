@@ -55,6 +55,11 @@
 
 <a href="adminshowAllSongs.php" style="font-size: 30px;position:relative;left:280px;top:-50px;">View All Songs</a>
 
+<form action="adminsearchDatabase.php" method="post" style="position:relative;left:900px;">
+	<input type="text" name="search">
+	<input type="submit" value="Search">
+</form>
+
 <?php
 displayBestSongs($db);
 displayNewestSongs($db);
